@@ -2,6 +2,8 @@ package entities;
 
 import lombok.*;
 
+import java.math.BigInteger;
+
 @Builder
 @EqualsAndHashCode
 @Getter

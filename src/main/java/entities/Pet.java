@@ -2,6 +2,7 @@ package entities;
 
 import lombok.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Getter
@@ -12,7 +13,7 @@ import java.util.List;
 @ToString
 @Builder
 public class Pet {
-    private long id;
+    private BigInteger id;
     private Category category;
     private String name;
     private List<String> photoUrls;

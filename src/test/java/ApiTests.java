@@ -7,7 +7,11 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigInteger;
+import java.sql.Time;
 import java.util.Collections;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import static io.restassured.RestAssured.given;
 
@@ -16,11 +20,13 @@ public class ApiTests {
 
     @Test
     public void addNewPetToTheStore() {
+        BigInteger myID = new BigInteger("123");
+
         Category dogCategory = new Category(235, "Dogs");
         System.out.println("I preparing test data...");
 
         Pet addingNewPet = Pet.builder()
-                .id(235)
+                .id(myID)
                 .category(dogCategory)
                 .name("Ajka")
                 .photoUrls(Collections.singletonList("urls"))
@@ -39,7 +45,7 @@ public class ApiTests {
         System.out.println("response " + addNewPet.asString());
 
 
-        long id = addingNewPet.getId();
+        BigInteger id = addingNewPet.getId();
 
         Response gettingInfoAboutPet = given()
                 .baseUri(BASE_URL)
@@ -83,7 +89,8 @@ public class ApiTests {
                 .when()
                 .get("/user/{username}");
         User getMailByName = gettingMail.as(User.class);
-        Assert.assertEquals("wrong mail",getMailByName.getEmail(), regNewUser.getEmail());
+        Assert.assertEquals("wrong mail", getMailByName.getEmail(), regNewUser.getEmail());
 
     }
+
 }
